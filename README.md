@@ -9,11 +9,13 @@ Go1.1's standard net/rpc package allows the client to make asynchronous calls, b
 ####Synchronous 
 (the standard example from [net/rpc](http://golang.org/pkg/net/rpc/))
 
-```func (t *Arith) Multiply(args *Args, reply *int) error {
+```
+func (t *Arith) Multiply(args *Args, reply *int) error {
 	*reply = args.A * args.B
 	return nil
 }
 ```
+
 ###Asynchronous
 
 ```
