@@ -4,16 +4,19 @@ This is a drop-in replacement for golang's net/rpc that allows the server side t
 
 Go1.1's standard net/rpc package allows the client to make asynchronous calls, but the corresponding service method on the server side is expected to synchronously return a value. If this method has to wait for another asynchronous process to finish, the goroutine is unnecessarily blocked. 
 
-## Example
+### Example
 
-###Synchronous (the standard example from net/rpc[http://golang.org/pkg/net/rpc/])
+####Synchronous 
+(the standard example from [net/rpc](http://golang.org/pkg/net/rpc/))
 
-func (t *Arith) Multiply(args *Args, reply *int) error {
+```func (t *Arith) Multiply(args *Args, reply *int) error {
 	*reply = args.A * args.B
 	return nil
 }
-
+```
 ###Asynchronous
+
+```
 import "github.com/sriram-srinivasan/rpc"
 
 func (t *Arith) Multiply(args *Args, _ *int) error {
@@ -28,7 +31,7 @@ func callLater(fut Future, args *Args) {
           fut.Set(args.A * args.B, /* err = */ nil) // message sent here.
       }()
 }
-
+```
 
 ## Install
 
